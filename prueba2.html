@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="js/index.js"></script>
+
+</head>
+    
+<body>
+    
+<div class="chart">
+    
+</div>
+
+<svg width="80" height="100" x="1" y="1">
+    <rect height="100" width="80" fill="white" stroke="red" stroke-width="10"></rect>
+    <circle r="3" cx="40" cy="98" fill="white"></circle>
+
+</svg>
+
+
+    
+    
+<script>
+
+
+    
+    var data = [4, 8, 15, 16, 23, 42];
+
+    var x = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .range([0, 420]);
+
+
+
+    d3.select('.chart')
+        .selectAll('div')
+        .data(data)
+        .enter().append('div')
+        .style('width', function(d) { return x(d) + "px"; })
+        .text(function (d) { return d })
+        
+
+        var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .html(function(d) { return d; })
+
+    var vis = d3.select(document.body)
+      .append('svg')
+      // REQUIRED:  Call the tooltip on the context of the visualization
+      .call(tip)
+
+     vis.append('rect')
+      .attr('width', 100)
+      .attr('height', 100)
+      // Show and hide the tooltip
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+</script>
+    
+    </body>
+    
+</html>
