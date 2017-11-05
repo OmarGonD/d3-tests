@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine|Roboto:light|Droid+Sans">
+        <style>
+            h1 {
+                font-family: 'Roboto', 'sans';
+                font-weight: 'light';
+                font-size: 48px;
+            } 
+            rect.bordered {
+                stroke: #E6E6E6;
+                stroke-width:2px;
+            }
+
+            text.mono {
+                font-size: 9pt;
+                font-family: Consolas, courier;
+                fill: #aaa;
+            }
+
+            text.axis-workweek {
+                fill: #000;
+            }
+
+            text.axis-worktime {
+                fill: #000;
+            }
+        </style>
+        
+        
+    </head>
+    <body>
+        
+        <h1>Mype1: Ventas por día y hora de la semana:</h1>
+        
+        <div id="heatMap"></div>
+        <div id="dataset-picker">
+        </div>
+        <script src="http://d3js.org/d3.v4.js"></script>
+        <script src="js/heatmap.js"></script>
+    </body>
+</html>
