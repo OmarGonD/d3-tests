@@ -1,8 +1,11 @@
 library(tools)
 library(xml2)
+library(dplyr)
+library(jsonlite)
 
 
-setwd("D:\\D3\\data\\Boletas")
+#setwd("D:\\D3\\data\\Boletas")
+setwd("/home/ogonzales/Escritorio/D3/d3-tests/data/Boletas")
 
 #page<-read_xml('<?xml version="1.0" encoding="UTF-8"?>
 #               <car id="id1">
@@ -20,28 +23,34 @@ readfile<-function(nextfile) {
   #results<-xml_attrs(nodes)  #test list if all attrs are in the same order
   
   
+  id_cliente <-  data %>% xml_find_all("//cbc:CustomerAssignedAccountID") %>%
+    xml_text() 
+  
   
   productos <-  data %>% xml_find_all("//cac:Item/cbc:Description") %>%
-                xml_text() 
+                          xml_text() 
   
   
   
   precios <-  data %>% xml_find_all("//cac:InvoiceLine/cbc:InvoicedQuantity") %>%
-    xml_text() %>%
-    as.integer()
-  
+                      xml_text() %>%
+                      as.integer()
+                    
   
   LineExtensionAmount <-  data %>% xml_find_all("//cac:InvoiceLine/cbc:LineExtensionAmount") %>%
-    xml_text() 
+                          xml_text() 
   
   
   
-  df <- data.frame(productos, precios, LineExtensionAmount)
+  df <- data.frame(id_cliente, productos, precios, LineExtensionAmount)
 }
 
 #get list of files and filter out xml files
-all.files <- list.files("D:\\D3\\data\\Boletas")
+#all.files <- list.files("D:\\D3\\data\\Boletas")
+all.files <- list.files()
 all.files<- all.files[tolower(file_ext(all.files)) == "xml"]
 #call function, returns list of data frames then merge together
 results<-lapply(all.files, readfile)
-aa <- do.call(rbind, results)
+boletas_sunat <- do.call(rbind, results)
+
+boletas_sunat_xml <- toJSON(boletas_sunat)
