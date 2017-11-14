@@ -363,13 +363,26 @@ TaxTotal_TaxSubTotal_TaxSubtotal_TaxableAmount <- data %>%
 
 
 TaxTotal_TaxSubTotal_TaxPercentt <- data %>% 
-  xml_find_all("//cac:InvoiceLine/cac:TaxTotal/cbc:TaxAmoun") %>%
+  xml_find_all("//cac:InvoiceLine/cac:TaxTotal/cbc:TaxAmount") %>%
   xml_text()
 
 
-####################
+##############################
+### Datos del emisor ###
+##############################
 
 
+
+
+Nombre_Comercial <- data %>% 
+  xml_find_all("//Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name") %>%
+  xml_text()
+
+
+Nombre_Comercial
+
+
+##############################
 
 
 
@@ -377,13 +390,49 @@ TaxTotal_TaxSubTotal_TaxPercentt <- data %>%
 productos <-  data %>% xml_find_all("//cac:Item/cbc:Description") %>%
              xml_text() 
 
-producto
+productos
 
 
-precios <-  data %>% xml_find_all("//cac:InvoiceLine/cbc:InvoicedQuantity") %>%
-            xml_text() 
+# Cantidad de unidades por ítem 
 
-precios
+
+cantidad_de_unidades <-  data %>% xml_find_all("//cac:InvoiceLine/cbc:InvoicedQuantity") %>%
+                          xml_text() 
+
+cantidad_de_unidades
+
+
+# Precio unitario 
+
+
+precios_unitarios <-  data %>% xml_find_all("//cac:InvoiceLine/cac:PricingReference/cac:AlternativeConditionPrice/cbc:PriceAmount/@currencyID") %>%
+                      xml_text() 
+
+
+
+precios_unitarios
+
+
+###
+
+
+
+
+LineExtensionAmount <-  data %>% xml_find_all("//cac:InvoiceLine/cbc:LineExtensionAmount") %>%
+                        xml_text() 
+
+LineExtensionAmount
+
+
+
+data.frame(productos, precios, LineExtensionAmount)
+
+
+library(tibble)
+
+
+as_tibble(productos, precios, LineExtensionAmount)
+
 
 
 

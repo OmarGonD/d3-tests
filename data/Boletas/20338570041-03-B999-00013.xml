@@ -44,8 +44,8 @@
 		<cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
 		<cac:Party>
 			<cac:PartyName>
-				<!--<cbc:Name><![CDATA[PRAXAIR PERU SRL]]></cbc:Name> -->
-				<cbc:Name><![CDATA[-]]></cbc:Name>
+				<cbc:Name><![CDATA[PRAXAIR PERU SRL]]></cbc:Name>
+				<!--<cbc:Name><![CDATA[-]]></cbc:Name>-->
 			</cac:PartyName>
 			<cac:PostalAddress>
 				<cbc:ID>160201</cbc:ID>
